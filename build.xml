@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Threaded Fractals">
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="${dir.buildfile}/.."/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+	   <javac srcdir="com/fractals" />
+        <jar destfile="${dir.jarfile}/threaded_fractals.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="com.fractals.FractalWindow"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+		 <restrict>
+		 <name name="*.class"/>
+            <fileset dir="${dir.jarfile}/com/fractals"/>
+		 </restrict>	
+        </jar>
+	 <delete>
+		  <fileset dir="${dir.jarfile}/com/fractals" includes="**/*.class"/>
+		 </delete>
+    </target>
+</project>
